@@ -9,6 +9,12 @@
             font-family: Arial;
             background: linear-gradient(green, black);
             color: white;
+            transition: 0.5s;
+        }
+
+        .light-mode {
+            background: white;
+            color: black;
         }
 
         .navbar {
@@ -24,10 +30,6 @@
             font-weight: bold;
         }
 
-        .navbar a:hover {
-            color: lime;
-        }
-
         .container {
             text-align: center;
             padding: 20px;
@@ -40,40 +42,49 @@
             border-radius: 10px;
         }
 
-        img {
-            width: 150px;
-            border-radius: 10px;
+        button {
+            padding: 10px;
+            border: none;
+            background: lime;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
 </head>
 
-<body>
+<body id="body">
 
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Players</a>
-        <a href="#">Scores</a>
+        <a href="index.html">Home</a>
+        <a href="players.html">Players</a>
+        <a href="scores.html">Scores</a>
     </div>
 
     <div class="container">
         <h1>⚽ My Football Website ⚽</h1>
 
         <div class="card">
-            <h2>🔥 Top Player</h2>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg">
-            <p>Cristiano Ronaldo</p>
+            <h2>📊 Live Score</h2>
+            <p id="score">Barcelona 1 - 1 Newcastle</p>
+            <button onclick="updateScore()">Update Score</button>
         </div>
 
         <div class="card">
-            <h2>📊 Latest Score</h2>
-            <p>Barcelona 6 - 2 Newcastle</p>
-        </div>
-
-        <div class="card">
-            <h2>📢 News</h2>
-            <p>Big match coming this weekend!</p>
+            <h2>🌙 Theme</h2>
+            <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
         </div>
     </div>
+
+    <script>
+        function updateScore() {
+            document.getElementById("score").innerHTML = "Barcelona 2 - 1 Newcastle ⚽🔥";
+        }
+
+        function toggleMode() {
+            document.getElementById("body").classList.toggle("light-mode");
+        }
+    </script>
 
 </body>
 </html>
