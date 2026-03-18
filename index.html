@@ -4,12 +4,46 @@
     <title>My Football Website</title>
 
     <style>
+        <script>
+const apiKey = "YOUR_API_KEY_HERE"; // <-- Replace this with your actual API key
+const matchId = 264673; // <-- Example match ID (you can change to any match from API)
+
+// Function to fetch live score
+async function fetchLiveScore() {
+    try {
+        const response = await fetch(`https://api.football-data.org/v4/matches/${matchId}`, {
+            headers: { 'X-Auth-Token': apiKey }
+        });
+        const data = await response.json();
+        
+        // Get home & away team names and scores
+        const homeTeam = data.match.homeTeam.name;
+        const awayTeam = data.match.awayTeam.name;
+        const homeScore = data.match.score.fullTime.home;
+        const awayScore = data.match.score.fullTime.away;
+
+        // Update your page
+        document.getElementById("live-score").innerText = `${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} ⚽🔥`;
+
+    } catch (error) {
+        console.error("Error fetching score:", error);
+        document.getElementById("live-score").innerText = "Could not load live score.";
+    }
+}
+
+// Fetch score every 60 seconds
+fetchLiveScore();
+setInterval(fetchLiveScore, 60000);
+</script>
         body {
             margin: 0;
             font-family: Arial;
             background: linear-gradient(green, black);
             color: white;
-            transition: 0.5s;
+            transition: 0.5s;<div class="card">
+    <h2>📊 Live Score</h2>
+    <p id="live-score">Loading live scores...</p>
+</div>
         }
 
         .light-mode {
