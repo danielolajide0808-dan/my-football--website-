@@ -1,177 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>My Football Website</title>
     <style>
-        <script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-
-let playerX = 130;
-let ballX = Math.random() * 280;
-let ballY = 0;
-let score = 0;
-
-// Controls
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") playerX -= 15;
-    if (e.key === "ArrowRight") playerX += 15;
-});
-
-// Game loop
-function draw() {
-    ctx.clearRect(0, 0, 300, 200);
-
-    // Player
-    ctx.fillStyle = "lime";
-    ctx.fillRect(playerX, 170, 40, 10);
-
-    // Ball
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-
-    // Ball movement
-    ballY += 3;
-
-    // Collision (goal)
-    if (
-        ballY > 165 &&
-        ballX > playerX &&
-        ballX < playerX + 40
-    ) {
-        score++;
-        document.getElementById("score").innerText = score;
-
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    // Missed ball
-    if (ballY > 200) {
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    requestAnimationFrame(draw);
-}
-
-draw();
-</script><script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-
-let playerX = 130;
-let ballX = Math.random() * 280;
-let ballY = 0;
-let score = 0;
-
-// Controls
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") playerX -= 15;
-    if (e.key === "ArrowRight") playerX += 15;
-});
-
-// Game loop
-function draw() {
-    ctx.clearRect(0, 0, 300, 200);
-
-    // Player
-    ctx.fillStyle = "lime";
-    ctx.fillRect(playerX, 170, 40, 10);
-
-    // Ball
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-
-    // Ball movement
-    ballY += 3;
-
-    // Collision (goal)
-    if (
-        ballY > 165 &&
-        ballX > playerX &&
-        ballX < playerX + 40
-    ) {
-        score++;
-        document.getElementById("score").innerText = score;
-
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    // Missed ball
-    if (ballY > 200) {
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    requestAnimationFrame(draw);
-}
-
-draw();
-</script><script>
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-
-let playerX = 130;
-let ballX = Math.random() * 280;
-let ballY = 0;
-let score = 0;
-
-// Controls
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") playerX -= 15;
-    if (e.key === "ArrowRight") playerX += 15;
-});
-
-// Game loop
-function draw() {
-    ctx.clearRect(0, 0, 300, 200);
-
-    // Player
-    ctx.fillStyle = "lime";
-    ctx.fillRect(playerX, 170, 40, 10);
-
-    // Ball
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-
-    // Ball movement
-    ballY += 3;
-
-    // Collision (goal)
-    if (
-        ballY > 165 &&
-        ballX > playerX &&
-        ballX < playerX + 40
-    ) {
-        score++;
-        document.getElementById("score").innerText = score;
-
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    // Missed ball
-    if (ballY > 200) {
-        ballY = 0;
-        ballX = Math.random() * 280;
-    }
-
-    requestAnimationFrame(draw);
-}
-
-draw();
-</script>
         body {
             margin: 0;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             background: linear-gradient(green, black);
             color: white;
             transition: 0.5s;
@@ -206,9 +41,10 @@ draw();
 
         .card {
             background: rgba(0,0,0,0.6);
-            margin: 20px;
+            margin: 20px auto;
             padding: 20px;
             border-radius: 10px;
+            max-width: 320px;
         }
 
         button {
@@ -217,13 +53,28 @@ draw();
             background: lime;
             font-weight: bold;
             border-radius: 5px;
-            margin-top: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .player-card {
+            display: inline-block;
+            background: rgba(0,0,0,0.7);
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            width: 180px;
+        }
+
+        .player-card img {
+            width: 150px;
+            border-radius: 10px;
         }
     </style>
 </head>
-
 <body id="body">
 
+    <!-- NAVBAR -->
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="players.html">Players</a>
@@ -233,60 +84,110 @@ draw();
     <div class="container">
         <h1>⚽ My Football Website ⚽</h1>
 
-        <!-- Live Score Section -->
-        <div class="card">
-            <h2>📊 Live Score</h2>
-            <p id="live-score">Loading live scores...</p>
-        </div>
-
-        <!-- Dark / Light Mode -->
+        <!-- DARK/LIGHT MODE -->
         <div class="card">
             <h2>🌙 Theme</h2>
             <button onclick="toggleMode()">Toggle Dark/Light Mode</button>
         </div>
+
+        <!-- LIVE SCORES (manual for now) -->
+        <div class="card">
+            <h2>📊 Live Scores</h2>
+            <p>Arsenal 2 - 1 Chelsea</p>
+            <p>Barcelona 3 - 0 Real Madrid</p>
+            <p>Manchester Utd 1 - 1 Liverpool</p>
+        </div>
+
+        <!-- FOOTBALL GAME -->
+        <div class="card">
+            <h2>🎮 Football Game</h2>
+
+            <div>
+                <button onclick="moveLeft()">⬅️</button>
+                <button onclick="moveRight()">➡️</button>
+            </div>
+
+            <p>Score: <span id="score">0</span></p>
+
+            <canvas id="gameCanvas" width="300" height="200" style="background:black;"></canvas>
+        </div>
+
+        <!-- PLAYERS -->
+        <h2>Top Players</h2>
+        <div class="player-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Cristiano_Ronaldo_2018.jpg" alt="Cristiano Ronaldo">
+            <h3>Cristiano Ronaldo</h3>
+            <p>Portuguese forward, one of the greatest footballers.</p>
+        </div>
+        <div class="player-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Lionel_Messi_20180626.jpg/330px-Lionel_Messi_20180626.jpg" alt="Lionel Messi">
+            <h3>Lionel Messi</h3>
+            <p>Argentine forward, known for incredible dribbling and goals.</p>
+        </div>
+        <div class="player-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Kylian_Mbapp%C3%A9_2019.jpg/330px-Kylian_Mbapp%C3%A9_2019.jpg" alt="Kylian Mbappé">
+            <h3>Kylian Mbappé</h3>
+            <p>French forward, super fast and young superstar.</p>
+        </div>
+
     </div>
 
+    <!-- SCRIPT (BOTTOM OF PAGE) -->
     <script>
-        // --- DARK / LIGHT MODE ---
+        // DARK/LIGHT MODE
         function toggleMode() {
             document.getElementById("body").classList.toggle("light-mode");
         }
 
-        // --- LIVE SCORES ---
-        const apiKey = "YOUR_API_KEY_HERE"; // <-- Replace with your Football-Data.org API key
-        const matchIds = [264673, 264674, 264675]; // <-- Example match IDs, can add multiple
+        // FOOTBALL GAME
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
 
-        async function fetchLiveScores() {
-            try {
-                let results = "";
-                for (const id of matchIds) {
-                    const response = await fetch(`https://api.football-data.org/v4/matches/${id}`, {
-                        headers: { 'X-Auth-Token': apiKey }
-                    });
-                    const data = await response.json();
-                    const homeTeam = data.match.homeTeam.name;
-                    const awayTeam = data.match.awayTeam.name;
-                    const homeScore = data.match.score.fullTime.home;
-                    const awayScore = data.match.score.fullTime.away;
+        let playerX = 130;
+        let ballX = Math.random() * 280;
+        let ballY = 0;
+        let score = 0;
 
-                    results += `${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} ⚽🔥\n`;
-                }
-                document.getElementById("live-score").innerText = results;
-            } catch (error) {
-                console.error("Error fetching score:", error);
-                document.getElementById("live-score").innerText = "Could not load live scores.";
+        function moveLeft() { playerX = Math.max(0, playerX - 20); }
+        function moveRight() { playerX = Math.min(260, playerX + 20); }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Player
+            ctx.fillStyle = "lime";
+            ctx.fillRect(playerX, 170, 40, 10);
+
+            // Ball
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = "white";
+            ctx.fill();
+
+            // Move ball
+            ballY += 3;
+
+            // Collision
+            if (ballY > 165 && ballX > playerX && ballX < playerX + 40) {
+                score++;
+                document.getElementById("score").innerText = score;
+
+                ballY = 0;
+                ballX = Math.random() * 280;
             }
+
+            // Missed ball
+            if (ballY > 200) {
+                ballY = 0;
+                ballX = Math.random() * 280;
+            }
+
+            requestAnimationFrame(gameLoop);
         }
 
-        // Fetch immediately and every 60 seconds
-        fetchLiveScores();
-        setInterval(fetchLiveScores, 60000);
+        // Start game after page loads
+        window.onload = gameLoop;
     </script>
 
 </body>
 </html>
-<div class="card">
-    <h2>🎮 Football Game</h2>
-    <p>Score: <span id="score">0</span></p>
-    <canvas id="game" width="300" height="200" style="background:black;"></canvas>
-</div>
