@@ -3,6 +3,172 @@
 <head>
     <title>My Football Website</title>
     <style>
+        <script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let playerX = 130;
+let ballX = Math.random() * 280;
+let ballY = 0;
+let score = 0;
+
+// Controls
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") playerX -= 15;
+    if (e.key === "ArrowRight") playerX += 15;
+});
+
+// Game loop
+function draw() {
+    ctx.clearRect(0, 0, 300, 200);
+
+    // Player
+    ctx.fillStyle = "lime";
+    ctx.fillRect(playerX, 170, 40, 10);
+
+    // Ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    // Ball movement
+    ballY += 3;
+
+    // Collision (goal)
+    if (
+        ballY > 165 &&
+        ballX > playerX &&
+        ballX < playerX + 40
+    ) {
+        score++;
+        document.getElementById("score").innerText = score;
+
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    // Missed ball
+    if (ballY > 200) {
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script><script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let playerX = 130;
+let ballX = Math.random() * 280;
+let ballY = 0;
+let score = 0;
+
+// Controls
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") playerX -= 15;
+    if (e.key === "ArrowRight") playerX += 15;
+});
+
+// Game loop
+function draw() {
+    ctx.clearRect(0, 0, 300, 200);
+
+    // Player
+    ctx.fillStyle = "lime";
+    ctx.fillRect(playerX, 170, 40, 10);
+
+    // Ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    // Ball movement
+    ballY += 3;
+
+    // Collision (goal)
+    if (
+        ballY > 165 &&
+        ballX > playerX &&
+        ballX < playerX + 40
+    ) {
+        score++;
+        document.getElementById("score").innerText = score;
+
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    // Missed ball
+    if (ballY > 200) {
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script><script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let playerX = 130;
+let ballX = Math.random() * 280;
+let ballY = 0;
+let score = 0;
+
+// Controls
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") playerX -= 15;
+    if (e.key === "ArrowRight") playerX += 15;
+});
+
+// Game loop
+function draw() {
+    ctx.clearRect(0, 0, 300, 200);
+
+    // Player
+    ctx.fillStyle = "lime";
+    ctx.fillRect(playerX, 170, 40, 10);
+
+    // Ball
+    ctx.beginPath();
+    ctx.arc(ballX, ballY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    // Ball movement
+    ballY += 3;
+
+    // Collision (goal)
+    if (
+        ballY > 165 &&
+        ballX > playerX &&
+        ballX < playerX + 40
+    ) {
+        score++;
+        document.getElementById("score").innerText = score;
+
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    // Missed ball
+    if (ballY > 200) {
+        ballY = 0;
+        ballX = Math.random() * 280;
+    }
+
+    requestAnimationFrame(draw);
+}
+
+draw();
+</script>
         body {
             margin: 0;
             font-family: Arial;
@@ -119,3 +285,8 @@
 
 </body>
 </html>
+<div class="card">
+    <h2>🎮 Football Game</h2>
+    <p>Score: <span id="score">0</span></p>
+    <canvas id="game" width="300" height="200" style="background:black;"></canvas>
+</div>
